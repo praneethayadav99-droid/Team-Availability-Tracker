@@ -1,0 +1,175 @@
+import csv
+import os
+
+FILE_NAME = "team_data.csv"
+
+
+def initialize_file():
+    if not os.path.exists(FILE_NAME):
+        with open(FILE_NAME, "w", newline="", encoding="utf-8") as file:
+            writer = csv.writer(file)
+            writer.writerow(["Name", "Department", "Status"])
+
+
+def add_member():
+    name = input("Enter Team Member Name: ")
+    department = input("Enter Department: ")
+
+    print("\nStatus Options:")
+    print("1. Available")
+    print("2. Busy")
+    print("3. On Leave")
+    print("4. Offline")
+
+    choice = input("Select Status: ")
+
+    statuses = {
+        "1": "Available",
+        "2": "Busy",
+        "3": "On Leave",
+        "4": "Offline"
+    }
+
+    status = statuses.get(choice, "Available")
+
+    with open(FILE_NAME, "a", newline="", encoding="utf-8") as file:
+        writer = csv.writer(file)
+        writer.writerow([name, department, status])
+
+    print("Member added successfully!")
+
+
+def view_members():
+    print("\n=== Team Availability ===")
+
+    with open(FILE_NAME, "r", encoding="utf-8") as file:
+        reader = csv.reader(file)
+        next(reader)
+
+        found = False
+
+        for row in reader:
+            found = True
+            print("-" * 40)
+            print(f"Name       : {row[0]}")
+            print(f"Department : {row[1]}")
+            print(f"Status     : {row[2]}")
+
+        if not found:
+            print("No records found.")
+
+
+def search_member():
+    keyword = input("\nEnter member name: ").lower()
+
+    found = False
+
+    with open(FILE_NAME, "r", encoding="utf-8") as file:
+        reader = csv.reader(file)
+        next(reader)
+
+        for row in reader:
+            if keyword in row[0].lower():
+                found = True
+                print("-" * 40)
+                print(f"Name       : {row[0]}")
+                print(f"Department : {row[1]}")
+                print(f"Status     : {row[2]}")
+
+    if not found:
+        print("Member not found.")
+
+
+def update_status():
+    name = input("Enter member name to update: ").lower()
+
+    rows = []
+
+    with open(FILE_NAME, "r", encoding="utf-8") as file:
+        reader = csv.reader(file)
+        header = next(reader)
+
+        for row in reader:
+            if row[0].lower() == name:
+                print("\n1. Available")
+                print("2. Busy")
+                print("3. On Leave")
+                print("4. Offline")
+
+                choice = input("New Status: ")
+
+                statuses = {
+                    "1": "Available",
+                    "2": "Busy",
+                    "3": "On Leave",
+                    "4": "Offline"
+                }
+
+                row[2] = statuses.get(choice, row[2])
+
+            rows.append(row)
+
+    with open(FILE_NAME, "w", newline="", encoding="utf-8") as file:
+        writer = csv.writer(file)
+        writer.writerow(header)
+        writer.writerows(rows)
+
+    print("Status updated successfully!")
+
+
+def delete_member():
+    name = input("Enter member name to delete: ").lower()
+
+    rows = []
+
+    with open(FILE_NAME, "r", encoding="utf-8") as file:
+        reader = csv.reader(file)
+        header = next(reader)
+
+        for row in reader:
+            if row[0].lower() != name:
+                rows.append(row)
+
+    with open(FILE_NAME, "w", newline="", encoding="utf-8") as file:
+        writer = csv.writer(file)
+        writer.writerow(header)
+        writer.writerows(rows)
+
+    print("Member removed successfully!")
+
+
+def menu():
+    initialize_file()
+
+    while True:
+        print("\n" + "=" * 50)
+        print("      TEAM AVAILABILITY TRACKER")
+        print("=" * 50)
+        print("1. Add Team Member")
+        print("2. View Team Status")
+        print("3. Search Member")
+        print("4. Update Status")
+        print("5. Delete Member")
+        print("6. Exit")
+
+        choice = input("\nEnter Choice: ")
+
+        if choice == "1":
+            add_member()
+        elif choice == "2":
+            view_members()
+        elif choice == "3":
+            search_member()
+        elif choice == "4":
+            update_status()
+        elif choice == "5":
+            delete_member()
+        elif choice == "6":
+            print("Exiting application...")
+            break
+        else:
+            print("Invalid choice.")
+            
+
+if __name__ == "__main__":
+    menu()
