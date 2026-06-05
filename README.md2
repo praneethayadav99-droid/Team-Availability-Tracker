@@ -1,0 +1,94 @@
+# 👥 Team Availability Tracker
+
+## 📌 Overview
+
+Team Availability Tracker is a Python application designed to monitor and manage team member availability. It allows organizations, project teams, and managers to keep track of employee statuses such as Available, Busy, On Leave, and Offline.
+
+The project demonstrates file handling, CRUD operations, data management, and menu-driven programming concepts in Python.
+
+---
+
+## ✨ Features
+
+* Add team members
+* Track availability status
+* Search employee records
+* Update availability information
+* Delete team members
+* Persistent CSV storage
+* Command-line interface
+
+---
+
+## 🛠️ Technologies Used
+
+* Python 3.x
+* CSV Module
+* File Handling
+* Functions
+* Exception Handling
+
+---
+
+## 📂 Project Structure
+
+```text
+team-availability-tracker/
+│
+├── main.py
+├── team_data.csv
+├── README.md
+└── requirements.txt
+```
+
+---
+
+## 🚀 Installation
+
+```bash
+git clone https://github.com/yourusername/team-availability-tracker.git
+cd team-availability-tracker
+python main.py
+```
+
+---
+
+## 📋 Sample Output
+
+```text
+Name       : John Smith
+Department : Development
+Status     : Available
+```
+
+---
+
+## 🔄 Workflow
+
+1. Add Team Member
+2. Assign Availability Status
+3. Store Information
+4. Search or Update Status
+5. View Team Dashboard
+6. Delete Records if Required
+
+---
+
+## 📚 Learning Outcomes
+
+* Python Fundamentals
+* CSV Data Management
+* CRUD Operations
+* Menu-Driven Applications
+* File Handling Techniques
+
+---
+
+## 🔮 Future Enhancements
+
+* GUI using Tkinter
+* Login Authentication
+* SQLite Database Integration
+* Web Dashboard with Flask
+* Email Notifications
+* Real-Time Team Status Monitoring
